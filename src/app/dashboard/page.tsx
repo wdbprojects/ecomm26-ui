@@ -1,6 +1,6 @@
-import DashboardPage from "@/modules/presentation/dashboard/dashboard-page";
+import DashboardPage from "@/modules/presentation/dashboard-page";
 
 const DashboardPageMain = () => {
-  return <DashboardPage />
+  return <DashboardPage />;
 };
 export default DashboardPageMain;

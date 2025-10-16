@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { LayoutPropsMain } from "@/config/types";
 import NextTopLoader from "nextjs-toploader";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const Providers = ({ children }: LayoutPropsMain) => {
   return (
@@ -11,7 +12,7 @@ const Providers = ({ children }: LayoutPropsMain) => {
       disableTransitionOnChange
     >
       <NextTopLoader showSpinner={false} color="#6d28d9" />
-      {children}
+      <NuqsAdapter>{children}</NuqsAdapter>
       <Toaster richColors closeButton position="bottom-right" expand={true} />
     </ThemeProvider>
   );

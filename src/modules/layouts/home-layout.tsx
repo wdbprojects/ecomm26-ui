@@ -5,9 +5,7 @@ const HomeLayout = ({ children }: LayoutPropsMain) => {
   return (
     <div>
       <HeaderMain />
-      <main className="container mx-auto flex overflow-y-auto px-2 md:px-4`">
-        {children}
-      </main>
+      <main className="container mx-auto px-2 md:px-4">{children}</main>
     </div>
   );
 };

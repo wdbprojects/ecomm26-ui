@@ -6,14 +6,16 @@ import Link from "next/link";
 import CartButton from "@/modules/components/cart/cart-button";
 import SearchInput from "@/modules/components/inventory/search-input";
 import BellButton from "@/modules/components/inventory/bell-button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
-const HeaderMain = async () => {
+const HeaderProducts = async () => {
   return (
-    <header className="bg-background fixed top-0 right-0 z-50 h-16 w-full flex items-center justify-between border-b px-2 py-2">
-      <div className="container mx-auto flex w-full items-center justify-between gap-1 sm:gap-2">
+    <header className="bg-background fixed top-0 right-0 z-50 flex h-16 w-full items-center justify-between border-b px-2 py-2">
+      <div className="mx-auto flex w-full items-center justify-between gap-1 sm:gap-2">
         {/* //INFO: MENU & LOGO  & NAV LINKS*/}
         <div className="flex flex-row items-center gap-8">
           <div className="flex flex-shrink-0 items-center gap-2 p-1">
+            <SidebarTrigger />
             <Link
               href={routes.home}
               className="flex flex-row items-center gap-0"
@@ -28,7 +30,7 @@ const HeaderMain = async () => {
           </div>
         </div>
         {/* //INFO: SEARCH BAR  */}
-        <div className="hidden sm:flex w-full items-center gap-3 p-1 justify-center">
+        <div className="hidden w-full items-center justify-center gap-3 p-1 sm:flex">
           <SearchInput
             placeholder="Search for products..."
             className="rounded-full shadow-none"
@@ -51,4 +53,4 @@ const HeaderMain = async () => {
     </header>
   );
 };
-export default HeaderMain;
+export default HeaderProducts;
