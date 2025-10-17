@@ -14,6 +14,8 @@ import { SingleProductType } from "@/config/types";
 import { CiShoppingCart } from "react-icons/ci";
 import SelectSizes from "@/modules/components/products/select-sizes";
 import SelectColors from "@/modules/components/products/select-colors";
+import useCartStore from "@/stores/cart-store";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: SingleProductType }) => {
   const { name, shortDescription, price, sizes, colors, images } = product;
@@ -21,6 +23,18 @@ const ProductCard = ({ product }: { product: SingleProductType }) => {
     size: sizes[0],
     color: colors[0],
   });
+
+  const { addToCart } = useCartStore();
+
+  const handleAddToCart = () => {
+    addToCart({
+      ...product,
+      quantity: 1,
+      selectedSize: productTypes.size,
+      selectedColor: productTypes.color,
+    });
+    toast.success("Product added successfully");
+  };
 
   const handleProductType = ({
     type,
@@ -77,6 +91,7 @@ const ProductCard = ({ product }: { product: SingleProductType }) => {
           className="flex w-full items-center justify-center"
           size="sm"
           variant="default"
+          onClick={handleAddToCart}
         >
           <CiShoppingCart className="size-4.5" />
           <span>Add to cart</span>

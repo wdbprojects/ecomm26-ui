@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { cartItems, steps } from "@/lib/placeholder-data";
+import { steps } from "@/lib/placeholder-data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ import { ShippingFormSchemaType } from "@/config/schemas";
 import CartItems from "@/modules/components/cart/cart-items";
 import CartShipping from "@/modules/components/cart/cart-shipping";
 import CartPayment from "@/modules/components/cart/cart-payment";
+import useCartStore from "@/stores/cart-store";
 
 const CartPage = () => {
   const [shippingForm, setShippingForm] =
@@ -20,6 +21,8 @@ const CartPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const activeStep = parseInt(searchParams.get("step") || "1");
+
+  const { cart: cartItems, removeFromCart } = useCartStore();
 
   const handleFlow = () => {
     router.push("/cart?step=2", { scroll: false });
@@ -80,7 +83,7 @@ const CartPage = () => {
                 activeStep={activeStep}
                 setShippingForm={setShippingForm}
               />
-            ) : activeStep === 3 /* && shippingForm */ ? (
+            ) : activeStep === 3 && shippingForm ? (
               <CartPayment activeStep={activeStep} />
             ) : (
               <p className="text-destructive text-sm italic">
@@ -101,17 +104,17 @@ const CartPage = () => {
             </h4>
             <h4 className="flex items-center justify-between px-2 text-sm tracking-wide">
               <span>Discount (10%): </span>
-              <span className="text-destructive font-medium">$10,00</span>
+              <span className="text-destructive font-medium">{`${subTotal > 0 ? formatPrice(subTotal * 0.1) : 0}`}</span>
             </h4>
             <h4 className="flex items-center justify-between px-2 text-sm tracking-wide">
               <span>Shipping Fee:</span>{" "}
-              <span className="font-medium">$10,69</span>
+              <span className="font-medium">{`${subTotal > 0 ? "$10,69" : "$0"}`}</span>
             </h4>
             <Separator className="" />
             <h4 className="mt-0 flex items-center justify-between px-2 text-lg tracking-wide">
               <span>Total:</span>{" "}
               <span className="font-bold">
-                {formatPrice(subTotal - 1000 + 1069)}
+                {formatPrice(subTotal > 0 ? subTotal - 1000 + 1069 : 0)}
               </span>
             </h4>
           </div>

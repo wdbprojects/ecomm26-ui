@@ -1,6 +1,5 @@
 "use client";
 
-import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paymentFormSchema, PaymentFormSchemaType } from "@/config/schemas";
@@ -12,7 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -35,9 +33,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Ban, ShoppingBasket } from "lucide-react";
 import Image from "next/image";
 
-const PaymentForm = ({ activeStep }: { activeStep: number }) => {
-  const router = useRouter();
-
+const PaymentForm = () => {
   const form = useForm<PaymentFormSchemaType>({
     resolver: zodResolver(paymentFormSchema),
     // mode: "onBlur",
@@ -56,7 +52,6 @@ const PaymentForm = ({ activeStep }: { activeStep: number }) => {
 
   const onSubmit = (values: PaymentFormSchemaType) => {
     console.log(values);
-    // router.push("/cart?step=3", { scroll: false });
   };
 
   return (

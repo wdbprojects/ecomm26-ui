@@ -13,9 +13,10 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { cartItems } from "@/lib/placeholder-data";
+import useCartStore from "@/stores/cart-store";
 
 const CartItems = () => {
+  const { cart: cartItems, removeFromCart } = useCartStore();
   const subTotal = cartItems.reduce((acc, current) => {
     return acc + current.price * current.quantity;
   }, 0);
@@ -45,9 +46,17 @@ const CartItems = () => {
 
       {/* CART ITEMS */}
       {cartItems.map((item) => {
-        const { id, colors, images, price, quantity, sizes } = item;
+        const {
+          id,
+          name,
+          images,
+          price,
+          quantity,
+          selectedSize,
+          selectedColor,
+        } = item;
         return (
-          <div className="pr-2" key={id}>
+          <div className="pr-2" key={`${id}-${selectedSize}-${selectedColor}`}>
             <div className="my-4 grid h-auto w-full grid-cols-12 gap-4 px-2 pt-2 pb-2 sm:px-4">
               {/* left */}
               <Link
@@ -65,7 +74,7 @@ const CartItems = () => {
               {/* right */}
               <div className="order-3 col-span-12 pb-0 sm:col-span-7">
                 <Link href="#">
-                  <h3 className="mb-0 text-lg leading-5 font-medium"></h3>
+                  <h3 className="mb-0 text-lg leading-5 font-medium">{name}</h3>
                 </Link>
                 <span className="text-sm font-medium text-orange-700 italic">
                   Only 5 left in stock - order soon
@@ -93,11 +102,11 @@ const CartItems = () => {
                 <ul className="text-foreground mt-1 mb-2 text-xs">
                   <li>
                     <span className="font-semibold">Size:</span>{" "}
-                    {item.selectedSize.toUpperCase()}
+                    {selectedSize.toUpperCase()}
                   </li>
                   <li>
                     <span className="font-semibold">Color:</span>{" "}
-                    {item.selectedColor}
+                    {selectedColor}
                   </li>
                 </ul>
 
@@ -128,7 +137,9 @@ const CartItems = () => {
                       variant="link"
                       className="text-destructive text-xs font-medium"
                       size="sm"
-                      onClick={() => {}}
+                      onClick={() => {
+                        removeFromCart(item);
+                      }}
                     >
                       Delete
                     </Button>
