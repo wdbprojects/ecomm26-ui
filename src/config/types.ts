@@ -9,6 +9,11 @@ export type PageProps = {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
+export interface FlatSearchParams {
+  color: string;
+  size: string;
+}
+
 export type LayoutPropsMain = {
   children: ReactNode;
 };

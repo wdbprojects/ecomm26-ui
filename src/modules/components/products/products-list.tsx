@@ -1,18 +1,9 @@
 import { ProductListType } from "@/config/types";
 import ProductCard from "@/modules/components/products/product-card";
-import { Button } from "@/components/ui/button";
-import { routes } from "@/config/routes";
-import Link from "next/link";
 import SimpleCategory from "@/modules/components/inventory/simple-category";
 import SimpleFilter from "@/modules/components/products/simple-filter";
 
-const ProductsList = ({
-  productList,
-  category,
-}: {
-  productList: ProductListType;
-  category: string;
-}) => {
+const ProductsList = ({ productList }: { productList: ProductListType }) => {
   return (
     <section className="relative w-full">
       <div className="mt-6 flex flex-col items-center justify-center space-y-4 px-3 sm:space-y-6 sm:px-4 md:space-y-8">
@@ -23,16 +14,6 @@ const ProductsList = ({
             return <ProductCard key={product.id} product={product} />;
           })}
         </div>
-      </div>
-      <div className="flex w-full flex-row justify-end p-4">
-        <Button asChild variant="link" size="sm">
-          <Link
-            className="text-sm"
-            href={category ? routes.productCategory(category) : routes.products}
-          >
-            View all products
-          </Link>
-        </Button>
       </div>
     </section>
   );

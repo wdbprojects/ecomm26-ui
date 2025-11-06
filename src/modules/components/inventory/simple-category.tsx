@@ -29,7 +29,8 @@ const SimpleCategory = () => {
           size="default"
           className={cn(
             "w-full text-sm",
-            selectedCategory === null && "!bg-muted",
+            selectedCategory === null &&
+              "!bg-background text-accent-foreground",
           )}
           onClick={handleClearParams}
         >
@@ -45,7 +46,7 @@ const SimpleCategory = () => {
                 className={cn(
                   "w-full text-xs",
                   selectedCategory?.toLowerCase() === cat.name.toLowerCase() &&
-                    "!bg-muted",
+                    "!bg-background text-accent-foreground",
                 )}
                 onClick={() => {
                   handleParamsChange(cat.name.toLowerCase());

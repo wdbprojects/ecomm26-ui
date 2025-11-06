@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Barlow } from "next/font/google";
 import "@/app/globals.css";
 import Providers from "@/app/providers";
 
-const montserrat = Montserrat({
+const barlow = Barlow({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${montserrat.className} antialiased`}>
+      <body className={`${barlow.className} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

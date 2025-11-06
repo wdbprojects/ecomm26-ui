@@ -11,7 +11,7 @@ const Providers = ({ children }: LayoutPropsMain) => {
       defaultTheme="dark"
       disableTransitionOnChange
     >
-      <NextTopLoader showSpinner={false} color="#6d28d9" />
+      <NextTopLoader showSpinner={false} color="#f59e0a" />
       <NuqsAdapter>{children}</NuqsAdapter>
       <Toaster richColors closeButton position="bottom-right" expand={true} />
     </ThemeProvider>

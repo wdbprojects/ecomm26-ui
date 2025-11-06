@@ -65,10 +65,10 @@ const CartItems = () => {
               >
                 <Image
                   src={images[item.selectedColor]}
-                  width={300}
-                  height={300}
                   alt={item.name}
-                  className="aspect-square max-w-[160px] object-contain"
+                  width={500}
+                  height={500}
+                  className="aspect-square"
                 />
               </Link>
               {/* right */}

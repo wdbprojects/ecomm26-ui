@@ -16,9 +16,10 @@ import SelectSizes from "@/modules/components/products/select-sizes";
 import SelectColors from "@/modules/components/products/select-colors";
 import useCartStore from "@/stores/cart-store";
 import { toast } from "sonner";
+import { formatPrice } from "@/lib/format-data";
 
 const ProductCard = ({ product }: { product: SingleProductType }) => {
-  const { name, shortDescription, price, sizes, colors, images } = product;
+  const { id, name, shortDescription, price, sizes, colors, images } = product;
   const [productTypes, setProductTypes] = useState({
     size: sizes[0],
     color: colors[0],
@@ -54,7 +55,7 @@ const ProductCard = ({ product }: { product: SingleProductType }) => {
   return (
     <Card className="w-full gap-1 space-y-0 rounded-sm border-none pt-0 pb-2">
       <CardHeader className="overflow-hidden px-0">
-        <Link href="/">
+        <Link href={`/products/${id}`}>
           <div className="relative aspect-5/6 w-full">
             <Image
               src={images[productTypes.color]}
@@ -63,7 +64,7 @@ const ProductCard = ({ product }: { product: SingleProductType }) => {
               className="w-full rounded-t-sm transition-all duration-300 hover:scale-105"
             />
             <span className="bg-background/90 text-foreground absolute top-1 right-1 rounded-sm px-2 py-0.5 text-sm font-bold">
-              $ {price.toFixed(2)}
+              {formatPrice(price)}
             </span>
           </div>
         </Link>
